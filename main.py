@@ -60,6 +60,9 @@ def mainpage():
         'music':'\n'.join([
             replaces(templates['music'],{
                 'tag':'',
+                'khd':'Visible',
+                'khdtype':'song',
+                'id':m['id'],
                 'img': escape_xaml(m['album']['blurPicUrl']),
                 'name': escape_xaml(m['name']),
                 'artists': escape_xaml('/'.join([
@@ -91,6 +94,9 @@ def newsongpage():
         'music':'\n'.join([
             replaces(templates['music'],{
                 'tag':'',
+                'khd':'Visible',
+                'khdtype':'song',
+                'id':m['id'],
                 'img': escape_xaml(m['album']['blurPicUrl']),
                 'name': escape_xaml(m['name']),
                 'artists': escape_xaml('/'.join([
@@ -134,6 +140,9 @@ def rankpage(listtype):
             'total':len(music_lists),
             'music':'\n'.join([
                 replaces(templates['music'],{
+                    'khd':'Visible',
+                    'khdtype':'song',
+                    'id':m['id'],
                     'img': escape_xaml(m['al']['picUrl']),
                     'name': escape_xaml(m['name']),
                     'artists': escape_xaml('/'.join([
@@ -207,6 +216,9 @@ def highqualitylistpage():
         'item':'\n'.join([
             replaces(templates['music'],{
                 'tag':'',
+                'khd':'Visible',
+                'khdtype':'playlist',
+                'id':l['id'],
                 'img': escape_xaml(l['coverImgUrl']),
                 'name': escape_xaml(l['name']),
                 'artists': escape_xaml(l['creator']['nickname']),
@@ -238,6 +250,9 @@ def newalbum():
     output = replaces(templates['newalbum'],{
         'item':'\n'.join([
             replaces(templates['music'],{
+                'khd':'Visible',
+                'khdtype':'album',
+                'id':l['id'],
                 'tag':'',
                 'img': escape_xaml(l['picUrl']),
                 'name': escape_xaml(l['name']),
