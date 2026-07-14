@@ -53,8 +53,8 @@ def mainpage():
     load_template('mainpage')
     load_template('music')
     print('mainpage-获取api数据')
-    music_data: dict = ncm.top_song(0).data # type: ignore
-    music_list = music_data['data'][:10]
+    music_data: dict = ncm.playlist_track_all(3779629).data # type: ignore
+    music_list = music_data['songs'][:10]
     print('mainpage-构建页面')
     output = replaces(templates['mainpage'],{
         'music':'\n'.join([
@@ -63,14 +63,14 @@ def mainpage():
                 'khd':'Visible',
                 'khdtype':'song',
                 'id':m['id'],
-                'img': escape_xaml(m['album']['blurPicUrl']),
+                'img': escape_xaml(m['al']['picUrl']),
                 'name': escape_xaml(m['name']),
                 'artists': escape_xaml('/'.join([
                     artist['name']
-                    for artist in m['artists']
+                    for artist in m['ar']
                 ])),
                 'url': escape_xaml(f'https://music.163.com/#/song?id={m['id']}'),
-                'album': escape_xaml(m['album']['name']),
+                'album': escape_xaml(m['al']['name']),
                 '':print(f'mainpage-music-构建内容-{index}/{len(music_list)}')
             }) for index, m in enumerate(music_list,start=1)
         ]),
