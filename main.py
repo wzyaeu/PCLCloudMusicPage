@@ -4,6 +4,7 @@ import os
 import shutil
 import json
 import secrets
+import requests
 
 def load_template(name, noxaml = False):
     print(f'load_template-加载模板文件-{name}')
@@ -40,11 +41,11 @@ def escape_xaml(text):
     if text is None:
         return ''
     return (
-        text.replace("&", "&amp;")
-             .replace("<", "&lt;")
-             .replace(">", "&gt;")
-             .replace('"', "&quot;")
-             .replace("'", "&apos;")
+        text.replace('&', '&amp;')
+             .replace('<', '&lt;')
+             .replace('>', '&gt;')
+             .replace(''', '&quot;')
+             .replace(''', '&apos;')
     )
 
 def mainpage():
@@ -112,7 +113,7 @@ def newsongpage():
     print('newsongpage-保存输出文件')
     save_output_file(f'newsong.json',json.dumps(
         {
-            "Title": f"Music 云音乐热门"
+            'Title': f'Music 云音乐热门'
         }
     ,ensure_ascii=False))
     save_output_file(f'newsong.xaml',output)
@@ -172,7 +173,7 @@ def rankpage(listtype):
         print(f'rankpage-保存输出文件-{index}/{len(music_lists)}')
         save_output_file(f'{listtype['id']}_rank_{index}.json',json.dumps(
             {
-                "Title": f"Music 云音乐 {listtype["name"]} | 第 {index} / {len(music_lists)} 页"
+                'Title': f'Music 云音乐 {listtype['name']} | 第 {index} / {len(music_lists)} 页'
             }
         ,ensure_ascii=False))
         save_output_file(f'{listtype['id']}_rank_{index}.xaml',o)
@@ -197,7 +198,7 @@ def ranklistpage(rank_l):
     print('ranklistpage-保存输出文件')
     save_output_file(f'rank_list.json',json.dumps(
         {
-            "Title": f"热门榜单"
+            'Title': f'热门榜单'
         }
     ,ensure_ascii=False))
     save_output_file(f'rank_list.xaml',output)
@@ -232,7 +233,7 @@ def highqualitylistpage():
     print('highqualitylistpage-保存输出文件')
     save_output_file(f'highqualitylist.json',json.dumps(
         {
-            "Title": f"精品歌单"
+            'Title': f'精品歌单'
         }
     ,ensure_ascii=False))
     save_output_file(f'highqualitylist.xaml',output)
@@ -270,7 +271,7 @@ def newalbum():
     print('newalbum-保存输出文件')
     save_output_file(f'newalbum.json',json.dumps(
         {
-            "Title": f"新碟上架"
+            'Title': f'新碟上架'
         }
     ,ensure_ascii=False))
     save_output_file(f'newalbum.xaml',output)
@@ -281,6 +282,27 @@ def sfile():
     save_output_file(f'build_info.md',replaces(templates['build_info.md'],{
         'build_version':BUILD_VERSION
     }))
+
+def music_vote():
+    print('music_vote-开始')
+    print('music_vote-获取关于音乐投票的issues')
+    gh_token = os.environ.get('GITHUB_TOKEN','')
+    repo_name = 'wzyaeu/PCLCloudMusicPage'
+    response = requests.get(
+        f'https://api.github.com/repos/{repo_name}/discussions/categories', 
+        headers={
+            'Authorization': gh_token,
+            'Accept': 'application/vnd.github.v3+json'
+        }, params={
+            "state": "open",
+            "labels": "音乐投票"
+        }, verify=False
+    )
+
+    issues = response.json()
+    print(issues)
+
+    ...
 
 def init():
     print('init-初始化中')
@@ -320,5 +342,8 @@ def init():
 
     print('init-运行sfile')
     sfile()
+
+    print('init-运行music_vote')
+    music_vote()
 
 init()
