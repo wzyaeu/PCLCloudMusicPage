@@ -5,6 +5,8 @@ import shutil
 import json
 import secrets
 import requests
+import re
+from datetime import datetime
 
 def load_template(name, noxaml = False):
     print(f'load_template-加载模板文件-{name}')
@@ -47,6 +49,9 @@ def escape_xaml(text):
              .replace(''', '&quot;')
              .replace(''', '&apos;')
     )
+
+def iso_to_timestamp(iso_str):
+    return int(datetime.fromisoformat(iso_str.replace('Z', '+00:00')).timestamp())
 
 def mainpage():
     print('mainpage-开始')
@@ -283,36 +288,315 @@ def sfile():
         'build_version':BUILD_VERSION
     }))
 
+def gh_request(token, method, url, **kwargs):
+    """GitHub REST API 请求封装"""
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Accept': 'application/vnd.github.v3+json'
+    }
+    if 'headers' in kwargs:
+        headers.update(kwargs.pop('headers'))
+    response = requests.request(
+        method, 
+        f'https://api.github.com/repos/{repo_name}{url}', 
+        headers=headers, 
+        **kwargs,
+        verify=not test_environment
+    )
+    response.raise_for_status()
+    return response
+
+def gh_graphql(token, query, variables=None):
+    """GitHub GraphQL API 请求封装"""
+    body = {'query': query}
+    if variables:
+        body['variables'] = variables
+    response = requests.post(
+        'https://api.github.com/graphql',
+        headers={
+            'Authorization': f'Bearer {token}',
+            'Accept': 'application/vnd.github.v3+json'
+        },
+        json=body,
+        verify=not test_environment
+    )
+    resp_json = response.json()
+    if 'errors' in resp_json:
+        print(f'GraphQL 错误: {resp_json["errors"]}')
+    response.raise_for_status()
+    return resp_json
+
 def music_vote():
     print('music_vote-开始')
+
+    print('music_vote-获取音乐投票的数据')
+    accepted_submission_filepath = os.path.join(BASE_PATH, 'accepted_submission.json')
+    if os.path.exists(accepted_submission_filepath):
+        with open(accepted_submission_filepath, 'r', encoding='utf-8') as f:
+            accepted_submission = json.load(f)
+    else:
+        accepted_submission = [] # 受理的投稿
+        with open(accepted_submission_filepath, 'w', encoding='utf-8') as f:
+            json.dump([],f)
     print('music_vote-获取关于音乐投票的issues')
+    global gh_token, repo_name
     gh_token = os.environ.get('GITHUB_TOKEN','')
     repo_name = 'wzyaeu/PCLCloudMusicPage'
-    response = requests.get(
-        f'https://api.github.com/repos/{repo_name}/discussions/categories', 
-        headers={
-            'Authorization': gh_token,
-            'Accept': 'application/vnd.github.v3+json'
-        }, params={
-            "state": "open",
-            "labels": "音乐投票"
-        }, verify=False
-    )
-
+    response = gh_request(gh_token, 'GET', f'/issues', params={
+        'state': 'all',
+        'labels': '音乐投票'
+    })
     issues = response.json()
-    print(issues)
 
-    ...
+    print('music_vote-格式化数据')
+    vote_data: dict[str, list[dict]] = {}
+    for issue in issues:
+        if frozenset({label['name'] for label in issue['labels']}) in \
+        {frozenset({'音乐投票','音乐投票-待确认'}),frozenset({'音乐投票','音乐投票-已受理'})}:
+            match = re.search(r'### 音乐 ID\n\n(\d+)\n\n', issue['body'])
+            if match: music_id = match.group(1)
+            else: music_id = ''
+
+            if issue['user']['login'] not in vote_data: 
+                vote_data[issue['user']['login']] = []
+            
+            vote_data[issue['user']['login']].append({
+                'issueid':issue['number'],
+                'musicid':music_id,
+                'vaild':bool(match),
+                'time':iso_to_timestamp(issue['created_at']),
+                'labels':{label['name'] for label in issue['labels']}
+            })
+    print(f'music_vote-已获取{len(vote_data.keys())}个用户共{sum([len(v) for v in vote_data.values()])}个投稿')
+
+    allissues = [x for lst in [[issue | {'user':user} for issue in issues] for user, issues in vote_data.items()] for x in lst] # 将issues每一项的每一项都添加user键并合并成一个列表
+    allissues.sort(key=lambda x: x['time'])
+    count = {} # 每个用户的投稿的计数
+    musicids = [] # 记录musicid，防止重复
+    for issue in allissues:
+        if issue['user'] not in count:
+            count[issue['user']] = 0
+        if issue['labels'] != {'音乐投票','音乐投票-已受理'}:
+            count[issue['user']] += 1
+            try:
+                assert count[issue['user']] <= 3, '投稿数超过上限（3个）'
+                assert issue['vaild'], '未识别到音乐ID'
+                assert issue['musicid'] not in musicids, '此音乐ID重复投稿'
+                song_detail = ncm.song_detail(ids=issue['musicid']).data
+                assert song_detail['code'] == 200, '音乐ID错误'
+                
+                print(f'music_vote-Issue(#{issue['issueid']})已受理！')
+                music_name = song_detail['songs'][0]['name']
+                music_imageurl = song_detail['songs'][0]['al']['picUrl']
+                submitter_name = issue['user']
+                submitter_url = f'https://github.com/{submitter_name}'
+                music_url = f'https://music.163.com/#/song?id={issue['musicid']}'
+                
+                # 通过 GraphQL API 获取仓库 ID、MusicVote 分类 ID、以及标签 node_id
+                owner, repo = repo_name.split('/')
+                resp_json = gh_graphql(gh_token, '''
+                    query($owner: String!, $repo: String!) {
+                        repository(owner: $owner, name: $repo) {
+                            id
+                            discussionCategories(first: 20) {
+                                nodes {
+                                    id
+                                    name
+                                    slug
+                                }
+                            }
+                            labels(first: 100) {
+                                nodes {
+                                    id
+                                    name
+                                }
+                            }
+                        }
+                    }
+                ''', variables={
+                    'owner': owner,
+                    'repo': repo
+                }) 
+                repo_data = resp_json['data']['repository']
+                repository_id = repo_data['id']
+                
+                # 找到 MusicVote 分类的 ID
+                category_id = next((c['id'] for c in repo_data['discussionCategories']['nodes'] if c.get('slug') == 'musicvote' or c.get('name') == 'MusicVote'), None)
+                
+                # 找到标签 node_id
+                label_map = {label['name']: label['id'] for label in repo_data['labels']['nodes']}
+                label_ids = [label_map[name] for name in ['音乐投票', '音乐投票-进行中'] if name in label_map]
+                
+                # 通过 GraphQL 创建 Discussion
+                discussion_body = f'# 音乐投票\n投稿人：[{submitter_name}]({submitter_url})\n投稿音乐：[{music_name}]({music_url})\n\n<img width="170" height="170" alt="image" src="{music_imageurl}" />\n\n---\n点击下方的"↑"箭头投票！'
+                discussion_title = f'[音乐投票] {music_name}'
+                
+                resp_json = gh_graphql(gh_token, '''
+                    mutation($repositoryId: ID!, $categoryId: ID!, $title: String!, $body: String!) {
+                        createDiscussion(input: {repositoryId: $repositoryId, categoryId: $categoryId, title: $title, body: $body}) {
+                            discussion {
+                                id
+                                number
+                            }
+                        }
+                    }
+                ''', variables={
+                    'repositoryId': repository_id,
+                    'categoryId': category_id,
+                    'title': discussion_title,
+                    'body': discussion_body
+                })
+                discussion = resp_json['data']['createDiscussion']['discussion']
+                discussion_node_id = discussion['id']
+                discussion_number = discussion['number']
+                print(f'music_vote-Discussion(#{discussion_number})已创建！')
+                
+                # 给 Discussion 添加标签
+                if label_ids:
+                    gh_graphql(gh_token, '''
+                        mutation($discussionId: ID!, $labelIds: [ID!]!) {
+                            addLabelsToLabelable(input: {labelableId: $discussionId, labelIds: $labelIds}) {
+                                clientMutationId
+                            }
+                        }
+                    ''', variables={
+                        'discussionId': discussion_node_id,
+                        'labelIds': label_ids
+                    })
+                
+                discussion_url = f'https://github.com/{repo_name}/discussions/{discussion_number}'
+                gh_request(gh_token, 'POST', f'/issues/{issue['issueid']}/comments', json={
+                    'body': f'[BOT回复] 您的投稿已受理！此投稿的投票discussion：{discussion_url}',
+                })
+
+                # 关闭原 issue 并附上 "音乐投票-已受理" 标签
+                gh_request(gh_token, 'PUT', f'/issues/{issue['issueid']}/labels', json={
+                    'labels': ['音乐投票','音乐投票-已受理']
+                })
+                
+                gh_request(gh_token, 'PATCH', f'/issues/{issue['issueid']}', json={
+                    'state': 'closed',
+                    'state_reason': 'completed'
+                })
+                musicids.append(issue['musicid'])
+                accepted_submission.append({
+                    'musicid':issue['musicid'],
+                    'issueid':issue['issueid'],
+                    'discussionid':discussion_number,
+                })
+            except Exception as e:
+                print(f'music_vote-Issue(#{issue['issueid']})因"{str(e)}"而无法受理。')
+                gh_request(gh_token, 'POST', f'/issues/{issue['issueid']}/comments', json={
+                    'body': f'[BOT回复] 您的投稿错误而无法受理！原因: "{str(e)}"',
+                })
+                gh_request(gh_token, 'PUT', f'/issues/{issue['issueid']}/labels', json={
+                    'labels': ['音乐投票','音乐投票-无效']
+                })
+                gh_request(gh_token, 'PATCH', f'/issues/{issue['issueid']}', json={
+                    'state': 'closed',
+                    'state_reason': 'not_planned'
+                })
+        elif issue['labels'] == {'音乐投票','音乐投票-已受理'}:
+            musicids.append(issue['musicid'])
+    with open(accepted_submission_filepath, 'w', encoding='utf-8') as f:
+        json.dump(accepted_submission,f)
+    return accepted_submission
+
+def musicvotepage(accepted_submissions):
+    def music_vote_count(discussionid):
+        owner, repo = repo_name.split('/')
+        resp_json = gh_graphql(gh_token, '''
+            query($owner: String!, $repo: String!, $number: Int!) {
+                repository(owner: $owner, name: $repo) {
+                    discussion(number: $number) {
+                        upvoteCount
+                    }
+                }
+            }
+        ''', variables={
+            'owner': owner,
+            'repo': repo,
+            'number': discussionid
+        })
+        return int(resp_json['data']['repository']['discussion']['upvoteCount'])
+    print('musicvotepage-开始')
+    print('musicvotepage-加载模板')
+    load_template('musicvotepage')
+    load_template('musicvotepage-music')
+
+    print(f'musicvotepage-获取api数据')
+    accepted_submissions = {accepted_submission['musicid']:accepted_submission for accepted_submission in accepted_submissions}
+    music_data: list = ncm.song_detail(ids=','.join([
+        accepted_submission_musicid for accepted_submission_musicid in accepted_submissions.keys()
+    ])).data['songs']
+
+    print(f'musicvotepage-数据排序')
+    music_data = [music | {'vote':music_vote_count(accepted_submissions[str(music['id'])]['discussionid'])} for music in music_data]
+    music_data.sort(key=lambda x: x['vote'],reverse=True)
+
+    chunk_size = 20
+    music_lists = [music_data[i:i + chunk_size] for i in range(0, len(music_data), chunk_size)] if len(music_data) > 0 else [[]]
+    all_output = []
+    print(f'musicvotepage-构建页面')
+    for vlindex, vl in enumerate(music_lists, start=1):
+        print(f'musicvotepage-构建页面-{vlindex}/{len(music_lists)}')
+        output = replaces(templates['musicvotepage'],{
+            'num':vlindex,
+            'listname':'音乐投票榜',
+            'total':len(music_lists),
+            'music':'\n'.join([
+                replaces(templates['musicvotepage-music'],{
+                    'khd':'Visible',
+                    'khdtype':'song',
+                    'id':m['id'],
+                    'img': escape_xaml(m['al']['picUrl']),
+                    'name': escape_xaml(m['name']),
+                    'artists': escape_xaml('/'.join([
+                        artist['name']
+                        for artist in m['ar']
+                    ])),
+                    'url': escape_xaml(f'https://music.163.com/#/song?id={m['id']}'),
+                    'album': escape_xaml(m['al']['name']),
+                    'color': '#ffbe35' if index == 1 else(
+                    '#99bce0' if index == 2 else(
+                    '#f5b7a3' if index == 3 else
+                    '#7b859a')),
+                    'rank': index,
+                    'vote':m['vote'],
+                    'voteurl':f'https://github.com/wzyaeu/PCLCloudMusicPage/discussions/{accepted_submissions[str(m['id'])]['discussionid']}',
+                }) for index, m in enumerate(vl,start=1+(vlindex-1)*20)
+            ]),
+            'next': '' if vlindex == len(music_lists) else replaces(templates['rankpage-next'],{
+                'num':vlindex+1,
+                'ltype':'vote'
+            }),
+        })
+
+        all_output.append(output)
+    print('musicvotepage-保存输出文件')
+    for index, o in enumerate(all_output, start=1):
+        print(f'musicvotepage-保存输出文件-{index}/{len(music_lists)}')
+        save_output_file(f'vote_rank_{index}.json',json.dumps(
+            {
+                'Title': f'Music 云音乐 投票排行榜 | 第 {index} / {len(music_lists)} 页'
+            }
+        ,ensure_ascii=False))
+        save_output_file(f'vote_rank_{index}.xaml',o)
 
 def init():
     print('init-初始化中')
-    global OUTPUT_PATH, BASE_PATH, BUILD_VERSION, templates, ncm
+    global OUTPUT_PATH, BASE_PATH, BUILD_VERSION, templates, ncm, test_environment
     templates = {}
     BUILD_VERSION = secrets.token_hex(4)
     BASE_PATH = os.path.dirname(__file__)
     OUTPUT_PATH = os.path.join(BASE_PATH,'output')
     shutil.rmtree(OUTPUT_PATH,ignore_errors=True)
     os.makedirs(OUTPUT_PATH,exist_ok=True)
+    test_environment = os.path.exists(os.path.join(BASE_PATH,'test_environment'))
+
+    if test_environment:
+        from urllib3.exceptions import InsecureRequestWarning
+        requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
     print('init-创建API对象')
     ncm = NeteaseCloudMusicApi()
@@ -344,6 +628,9 @@ def init():
     sfile()
 
     print('init-运行music_vote')
-    music_vote()
+    accepted_submissions = music_vote()
+
+    print('init-运行musicvotepage')
+    musicvotepage(accepted_submissions)
 
 init()
