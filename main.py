@@ -46,8 +46,8 @@ def escape_xaml(text):
         text.replace('&', '&amp;')
              .replace('<', '&lt;')
              .replace('>', '&gt;')
-             .replace(''', '&quot;')
-             .replace(''', '&apos;')
+             .replace('"', '&quot;')
+             .replace("'", '&apos;')
     )
 
 def iso_to_timestamp(iso_str):
