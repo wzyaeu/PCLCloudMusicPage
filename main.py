@@ -412,6 +412,8 @@ def music_vote():
     for issue in allissues:
         if issue['user'] not in count:
             count[issue['user']] = 0
+        if len(issue['labels']) != 2:
+            continue
         if issue['labels'] != {'音乐投票','音乐投票-已受理'}:
             count[issue['user']] += 1
             try:
