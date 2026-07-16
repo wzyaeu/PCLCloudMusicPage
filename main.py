@@ -329,7 +329,7 @@ def gh_graphql(token, query, variables=None):
 def music_vote():
     print('music_vote-开始')
     global gh_token, repo_name
-    gh_token = os.environ.get('GITHUB_TOKEN','')
+    gh_token = os.environ.get('MY_GITHUB_TOKEN','')
     repo_name = 'wzyaeu/PCLCloudMusicPage'
 
     print('music_vote-获取音乐投票的数据')
