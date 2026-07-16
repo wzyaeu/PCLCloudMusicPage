@@ -53,11 +53,18 @@ def escape_xaml(text):
 def iso_to_timestamp(iso_str):
     return int(datetime.fromisoformat(iso_str.replace('Z', '+00:00')).timestamp())
 
+def label_template_load():
+    load_template('label_paid')
+    load_template('label_vip')
+    load_template('label_votecount')
+
 def mainpage():
     print('mainpage-开始')
     print('mainpage-加载模板')
     load_template('mainpage')
     load_template('music')
+    label_template_load()
+
     print('mainpage-获取api数据')
     music_data: dict = ncm.playlist_track_all(3779629).data # type: ignore
     music_list = music_data['songs'][:10]
@@ -66,6 +73,10 @@ def mainpage():
         'music':'\n'.join([
             replaces(templates['music'],{
                 'tag':'',
+                'label':''.join([
+                    templates['label_vip'] if m['fee'] == 1 else '',
+                    templates['label_paid'] if m['fee'] == 4 else '',
+                ]),
                 'khd':'Visible',
                 'khdtype':'song',
                 'id':m['id'],
@@ -91,6 +102,7 @@ def newsongpage():
     print('newsongpage-加载模板')
     load_template('newsongpage')
     load_template('music')
+    label_template_load()
 
     print(f'newsongpage-获取api数据')
     music_data: dict = ncm.top_song(0).data # type: ignore
@@ -100,6 +112,10 @@ def newsongpage():
         'music':'\n'.join([
             replaces(templates['music'],{
                 'tag':'',
+                'label':''.join([
+                    templates['label_vip'] if m['fee'] == 1 else '',
+                    templates['label_paid'] if m['fee'] == 4 else '',
+                ]),
                 'khd':'Visible',
                 'khdtype':'song',
                 'id':m['id'],
@@ -130,6 +146,7 @@ def rankpage(listtype):
     load_template('rankpage')
     load_template('rankpage-next')
     load_template('rankpage-musictag')
+    label_template_load()
 
     print(f'rankpage-获取api数据')
     music_data = rankncm.playlist_track_all(listtype['id'])
@@ -164,6 +181,10 @@ def rankpage(listtype):
                         '#7b859a')),
                         'rank': index,
                     }),
+                    'label':''.join([
+                        templates['label_vip'] if m['fee'] == 1 else '',
+                        templates['label_paid'] if m['fee'] == 4 else '',
+                    ]),
                 }) for index, m in enumerate(vl,start=1+(vlindex-1)*20)
             ]),
             'next': '' if vlindex == len(music_lists) else replaces(templates['rankpage-next'],{
@@ -222,6 +243,7 @@ def highqualitylistpage():
         'item':'\n'.join([
             replaces(templates['music'],{
                 'tag':'',
+                'label':'',
                 'khd':'Visible',
                 'khdtype':'playlist',
                 'id':l['id'],
@@ -260,6 +282,7 @@ def newalbum():
                 'khdtype':'album',
                 'id':l['id'],
                 'tag':'',
+                'label':'',
                 'img': escape_xaml(l['picUrl']),
                 'name': escape_xaml(l['name']),
                 'artists': escape_xaml('/'.join([
@@ -560,7 +583,8 @@ def musicvotepage(accepted_submissions):
     print('musicvotepage-开始')
     print('musicvotepage-加载模板')
     load_template('musicvotepage')
-    load_template('musicvotepage-music')
+    load_template('rankpage-musictag')
+    label_template_load()
 
     print(f'musicvotepage-获取api数据')
     accepted_submissions = {accepted_submission['musicid']:accepted_submission for accepted_submission in accepted_submissions}
@@ -583,7 +607,7 @@ def musicvotepage(accepted_submissions):
             'listname':'音乐投票榜',
             'total':len(music_lists),
             'music':'\n'.join([
-                replaces(templates['musicvotepage-music'],{
+                replaces(templates['music'],{
                     'khd':'Visible',
                     'khdtype':'song',
                     'id':m['id'],
@@ -595,13 +619,21 @@ def musicvotepage(accepted_submissions):
                     ])),
                     'url': escape_xaml(f'https://music.163.com/#/song?id={m['id']}'),
                     'album': escape_xaml(m['al']['name']),
-                    'color': '#ffbe35' if index == 1 else(
-                    '#99bce0' if index == 2 else(
-                    '#f5b7a3' if index == 3 else
-                    '#7b859a')),
-                    'rank': index,
-                    'vote':m['vote'],
-                    'voteurl':f'https://github.com/wzyaeu/PCLCloudMusicPage/discussions/{accepted_submissions[str(m['id'])]['discussionid']}',
+                    'tag':replaces(templates['rankpage-musictag'],{
+                        'color': '#ffbe35' if index == 1 else(
+                        '#99bce0' if index == 2 else(
+                        '#f5b7a3' if index == 3 else
+                        '#7b859a')),
+                        'rank': index,
+                    }),
+                    'label':''.join([
+                        replaces(templates['label_votecount'],{
+                            'count':m['vote'],
+                            'voteurl':f'https://github.com/wzyaeu/PCLCloudMusicPage/discussions/{accepted_submissions[str(m['id'])]['discussionid']}',
+                        }),
+                        templates['label_vip'] if m['fee'] == 1 else '',
+                        templates['label_paid'] if m['fee'] == 4 else '',
+                    ]),
                 }) for index, m in enumerate(vl,start=1+(vlindex-1)*20)
             ]),
             'next': '' if vlindex == len(music_lists) else replaces(templates['rankpage-next'],{
