@@ -328,20 +328,56 @@ def gh_graphql(token, query, variables=None):
 
 def music_vote():
     print('music_vote-开始')
+    global gh_token, repo_name
+    gh_token = os.environ.get('GITHUB_TOKEN','')
+    repo_name = 'wzyaeu/PCLCloudMusicPage'
 
     print('music_vote-获取音乐投票的数据')
     accepted_submission_filepath = os.path.join(BASE_PATH, 'accepted_submission.json')
     if os.path.exists(accepted_submission_filepath):
         with open(accepted_submission_filepath, 'r', encoding='utf-8') as f:
             accepted_submission = json.load(f)
+
+        for accs in accepted_submission[:]:
+            response = gh_request(gh_token, 'GET', f'/issues/{accs['issueid']}')
+            try:
+                response.raise_for_status()
+            except:
+                # 检测到已失效的 issue，删除对应的 discussion，并从 accepted_submission 中移除此项
+                print(f'music_vote-Issue(#{accs["issueid"]})已失效，正在清理...')
+                owner, repo = repo_name.split('/')
+                # 通过 GraphQL 获取 discussion 的 node ID
+                resp_json = gh_graphql(gh_token, '''
+                    query($owner: String!, $repo: String!, $number: Int!) {
+                        repository(owner: $owner, name: $repo) {
+                            discussion(number: $number) {
+                                id
+                            }
+                        }
+                    }
+                ''', variables={
+                    'owner': owner,
+                    'repo': repo,
+                    'number': accs['discussionid']
+                })
+                discussion_node_id = resp_json['data']['repository']['discussion']['id']
+                # 删除 discussion
+                gh_graphql(gh_token, '''
+                    mutation($discussionId: ID!) {
+                        deleteDiscussion(input: {id: $discussionId}) {
+                            clientMutationId
+                        }
+                    }
+                ''', variables={
+                    'discussionId': discussion_node_id
+                })
+                print(f'music_vote-Discussion(#{accs["discussionid"]})已删除！')
+                accepted_submission.remove(accs)
     else:
         accepted_submission = [] # 受理的投稿
         with open(accepted_submission_filepath, 'w', encoding='utf-8') as f:
             json.dump([],f)
     print('music_vote-获取关于音乐投票的issues')
-    global gh_token, repo_name
-    gh_token = os.environ.get('GITHUB_TOKEN','')
-    repo_name = 'wzyaeu/PCLCloudMusicPage'
     response = gh_request(gh_token, 'GET', f'/issues', params={
         'state': 'all',
         'labels': '音乐投票'
@@ -596,7 +632,7 @@ def init():
 
     if test_environment:
         from urllib3.exceptions import InsecureRequestWarning
-        requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+        requests.packages.urllib3.disable_warnings(InsecureRequestWarning) # type: ignore
 
     print('init-创建API对象')
     ncm = NeteaseCloudMusicApi()
