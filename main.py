@@ -726,14 +726,14 @@ def init():
     print('init-运行mainpage')
     mainpage()
 
-    # print('init-运行newsongpage')
-    # newsongpage()
+    print('init-运行newsongpage')
+    newsongpage()
     
-    # print('init-运行music_vote')
-    # accepted_submissions = music_vote()
+    print('init-运行music_vote')
+    accepted_submissions = music_vote()
 
-    # print('init-运行musicvotepage')
-    # musicvotepage(accepted_submissions)
+    print('init-运行musicvotepage')
+    musicvotepage(accepted_submissions)
 
     rank_l = ncm.toplist_detail().data['list']
     print('init-运行rank')
