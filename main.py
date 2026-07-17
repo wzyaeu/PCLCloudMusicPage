@@ -414,12 +414,18 @@ def music_vote():
             accepted_submission = json.load(f)
 
         for accs in accepted_submission[:]:
-            response = gh_request(gh_token, 'GET', f'/issues/{accs['issueid']}')
+            issue_invalid = False
             try:
+                response = gh_request(gh_token, 'GET', f'/issues/{accs['issueid']}')
                 response.raise_for_status()
+                if response.json()['state'] == 'closed':
+                    issue_invalid = True
+                    print(f'music_vote-Issue(#{accs["issueid"]})已被关闭，正在清理...')
             except:
-                # 检测到已失效的 issue，删除对应的 discussion，并从 accepted_submission 中移除此项
+                issue_invalid = True
                 print(f'music_vote-Issue(#{accs["issueid"]})已失效，正在清理...')
+            if issue_invalid:
+                # 删除对应的 discussion，并从 accepted_submission 中移除此项
                 owner, repo = repo_name.split('/')
                 # 通过 GraphQL 获取 discussion 的 node ID
                 resp_json = gh_graphql(gh_token, '''
@@ -447,6 +453,12 @@ def music_vote():
                     'discussionId': discussion_node_id
                 })
                 print(f'music_vote-Discussion(#{accs["discussionid"]})已删除！')
+                # 尝试删除原 issue
+                try:
+                    gh_request(gh_token, 'DELETE', f'/issues/{accs['issueid']}')
+                    print(f'music_vote-Issue(#{accs["issueid"]})已删除！')
+                except Exception as e:
+                    print(f'music_vote-Issue(#{accs["issueid"]})删除失败：{str(e)}')
                 accepted_submission.remove(accs)
     else:
         accepted_submission = [] # 受理的投稿
@@ -579,18 +591,13 @@ def music_vote():
                 
                 discussion_url = f'https://github.com/{repo_name}/discussions/{discussion_number}'
                 gh_request(gh_token, 'POST', f'/issues/{issue['issueid']}/comments', json={
-                    'body': f'[BOT回复] 您的投稿已受理！此投稿的投票discussion：{discussion_url}',
+                    'body': f'[BOT回复] 您的投稿已受理！可以前往{discussion_url}投票！',
                 })
 
-                # 关闭原 issue 并附上 "音乐投票-已受理" 标签
                 gh_request(gh_token, 'PUT', f'/issues/{issue['issueid']}/labels', json={
                     'labels': ['音乐投票','音乐投票-已受理']
                 })
                 
-                gh_request(gh_token, 'PATCH', f'/issues/{issue['issueid']}', json={
-                    'state': 'closed',
-                    'state_reason': 'completed'
-                })
                 musicids.append(issue['musicid'])
                 accepted_submission.append({
                     'musicid':issue['musicid'],
