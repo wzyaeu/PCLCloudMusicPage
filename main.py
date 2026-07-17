@@ -251,6 +251,8 @@ def rankpage(listtype):
         save_output_file(f'{listtype['id']}_rank_{index}.xaml',o)
 
     print('rankpage-保存排名差分')
+    if rank_diff['update'] < listtype['updateTime']:
+        rank_diff['update'] = listtype['updateTime']
     with open(rank_diff_path,'w',encoding='utf-8') as f:
         json.dump(rank_diff, f)
 
