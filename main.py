@@ -152,12 +152,12 @@ def rankpage(listtype):
             if rank < rank_diff['rank'][mid]['n']: # 排名升了
                 rank_diff['rank'][mid] = {'n':rank,'d':rank-rank_diff['rank'][mid]['n']}
                 return replaces(templates['label_rank_up'],{
-                    'num':rank_diff['rank'][mid]['d']
+                    'num':-rank_diff['rank'][mid]['d']
                 })
             elif rank > rank_diff['rank'][mid]['n']: # 排名降了
                 rank_diff['rank'][mid] = {'n':rank,'d':rank-rank_diff['rank'][mid]['n']}
                 return replaces(templates['label_rank_down'],{
-                    'num':-rank_diff['rank'][mid]['d']
+                    'num':rank_diff['rank'][mid]['d']
                 })
             else:
                 rank_diff['rank'][mid] = {'n':rank,'d':0}
@@ -167,7 +167,7 @@ def rankpage(listtype):
                 return replaces(templates['label_rank_new'],{})
             elif rank_diff['rank'][mid]['d'] > 0:
                 return replaces(templates['label_rank_up'],{
-                    'num':rank_diff['rank'][mid]['d']
+                    'num':-rank_diff['rank'][mid]['d']
                 })
             elif rank_diff['rank'][mid]['d'] < 0:
                 return replaces(templates['label_rank_down'],{
