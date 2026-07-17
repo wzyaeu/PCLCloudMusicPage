@@ -227,9 +227,9 @@ def rankpage(listtype):
                         'rank': index,
                     }),
                     'label':''.join([
+                        get_music_rank_diff_label(m['id'], index),
                         templates['label_vip'] if m['fee'] == 1 else '',
-                        templates['label_paid'] if m['fee'] == 4 else '',
-                        get_music_rank_diff_label(m['id'], index)
+                        templates['label_paid'] if m['fee'] == 4 else ''
                     ]),
                 }) for index, m in enumerate(vl,start=1+(vlindex-1)*20)
             ]),
