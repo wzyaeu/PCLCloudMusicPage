@@ -143,39 +143,6 @@ def newsongpage():
     save_output_file(f'newsong.xaml',output)
 
 def rankpage(listtype):
-    def get_music_rank_diff_label(mid, rank):
-        if mid not in rank_diff['rank']:
-            rank_diff['rank'][mid] = {'n':rank,'d':None}
-            return replaces(templates['label_rank_new'],{})
-
-        if rank_diff['update'] < listtype['updateTime']: # 页面更新时间晚于榜单更新时间
-            if rank < rank_diff['rank'][mid]['n']: # 排名升了
-                rank_diff['rank'][mid] = {'n':rank,'d':rank-rank_diff['rank'][mid]['n']}
-                return replaces(templates['label_rank_up'],{
-                    'num':-rank_diff['rank'][mid]['d']
-                })
-            elif rank > rank_diff['rank'][mid]['n']: # 排名降了
-                rank_diff['rank'][mid] = {'n':rank,'d':rank-rank_diff['rank'][mid]['n']}
-                return replaces(templates['label_rank_down'],{
-                    'num':rank_diff['rank'][mid]['d']
-                })
-            else:
-                rank_diff['rank'][mid] = {'n':rank,'d':0}
-                return ''
-        else: # 没更新
-            if rank_diff['rank'][mid]['d'] == None:
-                return replaces(templates['label_rank_new'],{})
-            elif rank_diff['rank'][mid]['d'] > 0:
-                return replaces(templates['label_rank_up'],{
-                    'num':-rank_diff['rank'][mid]['d']
-                })
-            elif rank_diff['rank'][mid]['d'] < 0:
-                return replaces(templates['label_rank_down'],{
-                    'num':rank_diff['rank'][mid]['d']
-                })
-            else:
-                return ''
-
     print(f'rankpage-开始-{listtype['name']}-{listtype['id']}')
     print('rankpage-加载模板')
     load_template('music')
@@ -190,14 +157,6 @@ def rankpage(listtype):
     chunk_size = 20
     music_lists = [music_list[i:i + chunk_size] for i in range(0, len(music_list), chunk_size)] if len(music_list) > 0 else [[]]
     all_output = []
-
-    print(f'rankpage-获取排名差分')
-    rank_diff_path = os.path.join(BASE_PATH,'data',f'rankdiff_{listtype['id']}.json')
-    if os.path.exists(rank_diff_path):
-        with open(rank_diff_path,'r',encoding='utf-8') as f:
-            rank_diff = json.load(f)
-    else:
-        rank_diff = {'update':listtype['updateTime'],'rank':{}}
 
     print(f'rankpage-构建页面')
     for vlindex, vl in enumerate(music_lists, start=1):
@@ -227,7 +186,6 @@ def rankpage(listtype):
                         'rank': index,
                     }),
                     'label':''.join([
-                        get_music_rank_diff_label(m['id'], index),
                         templates['label_vip'] if m['fee'] == 1 else '',
                         templates['label_paid'] if m['fee'] == 4 else ''
                     ]),
@@ -249,12 +207,6 @@ def rankpage(listtype):
             }
         ,ensure_ascii=False))
         save_output_file(f'{listtype['id']}_rank_{index}.xaml',o)
-
-    print('rankpage-保存排名差分')
-    if rank_diff['update'] < listtype['updateTime']:
-        rank_diff['update'] = listtype['updateTime']
-    with open(rank_diff_path,'w',encoding='utf-8') as f:
-        json.dump(rank_diff, f)
 
 def ranklistpage(rank_l):
     print('ranklistpage-开始')
