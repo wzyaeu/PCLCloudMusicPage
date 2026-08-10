@@ -4,6 +4,10 @@ PCL Cloud Music Page主页仓库。
 
 ## 使用
 
+### 使用预设
+
+现已上架PCL预设，前往`设置->个性化->主页`，选择预设`Music 云音乐热门`。
+
 ### 使用链接
 
 前往`设置->个性化->主页`，输入联网下载地址`cloudmusic.p.kaphia.qzz.io`。
