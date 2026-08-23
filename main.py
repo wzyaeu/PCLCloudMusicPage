@@ -308,13 +308,6 @@ def newalbum():
     ,ensure_ascii=False))
     save_output_file(f'newalbum.xaml',output)
 
-def sfile():
-    print('sfile-保存build_info.md')
-    load_template('build_info.md',noxaml=True)
-    save_output_file(f'build_info.md',replaces(templates['build_info.md'],{
-        'build_version':BUILD_VERSION
-    }))
-
 def gh_request(token, method, url, **kwargs):
     """GitHub REST API 请求封装"""
     headers = {
@@ -712,8 +705,5 @@ def init():
 
     print('init-运行newalbum')
     newalbum()
-
-    print('init-运行sfile')
-    sfile()
 
 init()
