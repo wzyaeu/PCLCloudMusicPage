@@ -109,6 +109,20 @@ def newsongpage():
 
     print(f'newsongpage-获取api数据')
     music_data: dict = ncm.top_song(0).data # type: ignore
+    os.makedirs(os.path.join(OUTPUT_PATH,'public'), exist_ok=True)
+
+    with open(os.path.join(OUTPUT_PATH,'public','new_song.json'), 'w', encoding='utf-8') as f:
+        json.dump([{
+            'name': m['name'],
+            'id': int(m['id']),
+            'artists': [a['name'] for a in m['artists']],
+            'url': f'https://music.163.com/#/song?id={m['id']}',
+            'jump_to_client': f'https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?type=music&id={m['id']}&type=song',
+            'type': {
+                'vip': m['fee'] == 1,
+                'paid': m['fee'] == 4,
+            }
+        } for m in music_data['data']], f, ensure_ascii=False)
 
     print('newsongpage-构建页面')
     output = replaces(templates['newsongpage'],{
@@ -157,6 +171,15 @@ def rankpage(listtype):
     chunk_size = 20
     music_lists = [music_list[i:i + chunk_size] for i in range(0, len(music_list), chunk_size)] if len(music_list) > 0 else [[]]
     all_output = []
+    os.makedirs(os.path.join(OUTPUT_PATH,'public','toplist',str(listtype['id'])),exist_ok=True)
+
+    with open(os.path.join(OUTPUT_PATH,'public','toplist',str(listtype['id']),'index.json'), 'w', encoding='utf-8') as f:
+        json.dump({
+            'id': int(listtype['id']),
+            'name': listtype['name'],
+            'desc': listtype['description'],
+            'page': len(music_lists)
+        }, f, ensure_ascii=False)
 
     print(f'rankpage-构建页面')
     for vlindex, vl in enumerate(music_lists, start=1):
@@ -196,6 +219,19 @@ def rankpage(listtype):
                 'ltype':listtype['id']
             }),
         })
+        print(f'rankpage-保存public数据')
+        with open(os.path.join(OUTPUT_PATH,'public','toplist',str(listtype['id']),f'{vlindex}.json'), 'w', encoding='utf-8') as f:
+            json.dump([{
+                'name': m['name'],
+                'id': int(m['id']),
+                'artists': [a['name'] for a in m['ar']],
+                'url': f'https://music.163.com/#/song?id={m['id']}',
+                'jump_to_client': f'https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?type=music&id={m['id']}&type=song',
+                'type': {
+                    'vip': m['fee'] == 1,
+                    'paid': m['fee'] == 4,
+                }
+            } for m in vl], f, ensure_ascii=False)
 
         all_output.append(output)
     print('rankpage-保存输出文件')
@@ -213,6 +249,15 @@ def ranklistpage(rank_l):
     print('ranklistpage-加载模板')
     load_template('ranklistpage')
     load_template('ranklistpage-item')
+    os.makedirs(os.path.join(OUTPUT_PATH,'public','toplist'), exist_ok=True)
+
+    with open(os.path.join(OUTPUT_PATH,'public','toplist','index.json'), 'w', encoding='utf-8') as f:
+        json.dump([{
+            'id': l['id'],
+            'name': l['name'],
+            'desc': l['description'],
+        } for l in rank_l], f, ensure_ascii=False)
+
     output = ''
     for index, listtype in enumerate(rank_l, start=1):
         print(f'ranklistpage-添加排行榜-{listtype['name']}')
@@ -241,6 +286,17 @@ def highqualitylistpage():
 
     print(f'highqualitylistpage-获取api数据')
     music_data = ncm.top_playlist_highquality().data['playlists']
+    os.makedirs(os.path.join(OUTPUT_PATH,'public'), exist_ok=True)
+
+    with open(os.path.join(OUTPUT_PATH,'public','highq_list.json'), 'w', encoding='utf-8') as f:
+        json.dump([{
+            'name': l['name'],
+            'id': int(l['id']),
+            'artist': l['creator']['nickname'],
+            'count': int(l['trackCount']),
+            'url': f'https://music.163.com/#/playlist?id={l['id']}',
+            'jump_to_client': f'https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?type=music&id={l['id']}&type=playlist',
+        } for l in music_data], f, ensure_ascii=False)
 
     print('highqualitylistpage-构建页面')
     output = replaces(templates['highqualitylistpage'],{
@@ -277,6 +333,17 @@ def newalbum():
 
     print(f'newalbum-获取api数据')
     music_data = ncm.album_new().data['albums']
+    os.makedirs(os.path.join(OUTPUT_PATH,'public'), exist_ok=True)
+
+    with open(os.path.join(OUTPUT_PATH,'public','hot_album.json'), 'w', encoding='utf-8') as f:
+        json.dump([{
+            'name': l['name'],
+            'id': int(l['id']),
+            'artist': [a['name'] for a in l['artists']],
+            'count': int(l['size']),
+            'url': f'https://music.163.com/#/album?id={l['id']}',
+            'jump_to_client': f'https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?type=music&id={l['id']}&type=album',
+        } for l in music_data], f, ensure_ascii=False)
 
     print('newalbum-构建页面')
     output = replaces(templates['newalbum'],{
@@ -667,6 +734,7 @@ def init():
     shutil.rmtree(OUTPUT_PATH,ignore_errors=True)
     os.makedirs(OUTPUT_PATH,exist_ok=True)
     os.makedirs(os.path.join(BASE_PATH,'data'),exist_ok=True)
+    os.makedirs(os.path.join(OUTPUT_PATH,'public'),exist_ok=True)
 
     test_environment = os.path.exists(os.path.join(BASE_PATH,'test_environment'))
 
