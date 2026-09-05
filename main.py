@@ -724,6 +724,11 @@ def musicvotepage(accepted_submissions):
         ,ensure_ascii=False))
         save_output_file(f'vote_rank_{index}.xaml',o)
 
+def redirects():
+    with open(os.path.join(OUTPUT_PATH, '_redirects'), 'w', encoding='utf-8') as f:
+        f.write('''/ /Custom.xaml 200
+/version /Custom.xaml.ini 200''')
+
 def init():
     print('init-初始化中')
     global OUTPUT_PATH, BASE_PATH, BUILD_VERSION, templates, ncm, test_environment
@@ -773,5 +778,8 @@ def init():
 
     print('init-运行newalbum')
     newalbum()
+
+    print('init-运行redirects')
+    redirects()
 
 init()

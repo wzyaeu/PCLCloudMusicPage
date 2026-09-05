@@ -10,7 +10,7 @@ PCL Cloud Music Page主页仓库。
 
 ### 使用链接
 
-前往`设置->个性化->主页`，输入联网下载地址`cloudmusic.p.kaphia.qzz.io`。
+前往`设置->个性化->主页`，输入联网下载地址`cloudmusic.p.kaphia.top`。
 
 ## 协议
 
