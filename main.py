@@ -66,6 +66,7 @@ def mainpage():
     print('mainpage-加载模板')
     load_template('mainpage')
     load_template('music')
+    load_template('sponsors')
     label_template_load()
 
     print('mainpage-获取api数据')
@@ -94,7 +95,10 @@ def mainpage():
                 '':print(f'mainpage-music-构建内容-{index}/{len(music_list)}')
             }) for index, m in enumerate(music_list,start=1)
         ]),
-        'gv':BUILD_VERSION
+        'gv':BUILD_VERSION,
+        'sponsors':'\n'.join([replaces(templates['sponsors'],{
+            'sponsor': s
+        }) for s in sponsors])
     })
     print('mainpage-保存输出文件')
     save_output_file('Custom.xaml',output)
@@ -731,7 +735,7 @@ def musicvotepage(accepted_submissions):
 
 def init():
     print('init-初始化中')
-    global OUTPUT_PATH, BASE_PATH, BUILD_VERSION, templates, ncm, test_environment
+    global OUTPUT_PATH, BASE_PATH, BUILD_VERSION, templates, ncm, test_environment, sponsors
     templates = {}
     BUILD_VERSION = secrets.token_hex(4)
     BASE_PATH = os.path.dirname(__file__)
@@ -740,6 +744,7 @@ def init():
     os.makedirs(OUTPUT_PATH,exist_ok=True)
     os.makedirs(os.path.join(BASE_PATH,'data'),exist_ok=True)
     os.makedirs(os.path.join(OUTPUT_PATH,'public'),exist_ok=True)
+    sponsors = requests.get('https://v4.gh-proxy.org/https://github.com/wzyaeu/IfadianSponsorGet/raw/refs/heads/pagedata/output.json').json()
 
     test_environment = os.path.exists(os.path.join(BASE_PATH,'test_environment'))
 
