@@ -1,0 +1,1829 @@
+<StackPanel>
+    
+    <local:MyCard Margin="0,0,0,3">
+        <StackPanel Margin="5"
+                    Orientation="Horizontal">
+            <Border Background="{DynamicResource ColorBrush4}"
+                    CornerRadius="5">
+                <TextBlock Margin="5,0,5,0"
+                           VerticalAlignment="Center"
+                           FontSize="18"
+                           Foreground="{DynamicResource ColorBrush7}"
+                           Text="Music 云音乐热门"/>
+            </Border>
+            <TextBlock Margin="10,3,3,3"
+                       FontWeight="Bold"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       Foreground="{DynamicResource ColorBrush3}"
+                       Text="排行榜"/>
+            <local:MyIconTextButton Margin="2"
+                                    Height="35"
+                                    VerticalAlignment="Center"
+                                    Text="刷新"
+                                    EventType="刷新页面"
+                                    LogoScale="1"
+                                    Logo="M841.140212 512.013257c0 181.498884-147.641328 329.140212-329.140212 329.140212s-329.140212-147.641328-329.140212-329.140212c0-175.391505 137.999348-318.746696 311.068586-328.211305l0 99.641714c0 3.249345 1.749929 6.286578 4.571392 7.928622 1.428103 0.821022 3.000662 1.214162 4.571392 1.214162s3.143289-0.39314 4.571392-1.214162l237.569748-137.141755c2.821463-1.642044 4.571392-4.679277 4.571392-7.928622s-1.749929-6.286578-4.571392-7.928622l-237.569748-137.141755c-2.856206-1.642044-6.286578-1.642044-9.142784 0-2.821463 1.642044-4.571392 4.679277-4.571392 7.928622l0 101.499527C280.537631 120.195606 109.717518 296.300248 109.717518 512.013257c0 221.820389 180.462093 402.282482 402.282482 402.282482s402.282482-180.462093 402.282482-402.282482L841.140212 512.013257z"/>
+            <local:MyIconTextButton
+    Margin="2"
+    Height="35"
+    VerticalAlignment="Center"
+    Text="下一页"
+    ColorType="Highlight"
+    EventType="打开帮助"
+    EventData="https://cloudmusic.p.kaphia.top/3001835560_rank_4.json"
+    LogoScale="1"
+    Logo="M633.361447 510.516239 253.723194 890.25682 320.748276 957.179574 767.411612 510.516239 320.748276 63.852903 253.723194 130.775657Z"/>
+        </StackPanel>
+    </local:MyCard>
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock FontSize="17"
+                   FontWeight="Bold"
+                   Foreground="{DynamicResource ColorBrush3}"
+                   Text="网易云ACG动画榜 第 3 / 5 页"/>
+        <Line X1="0"
+              Grid.Column="1"
+              Y1="0"
+              X2="1000"
+              Y2="0"
+              StrokeThickness="2"
+              VerticalAlignment="Center"
+              Stroke="{DynamicResource ColorBrush3}"
+              Margin="10,0"/>
+    </Grid>
+    <WrapPanel VerticalAlignment="Center"
+               Margin="0,2">
+        <local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/RLet3BtcXtXCGydDLCPe8w==/109951169472319960.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="41"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="空の箱 (井芹仁菜、河原木桃香)"
+                       ToolTip="空の箱 (井芹仁菜、河原木桃香)"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="トゲナシトゲアリ"
+                   Height="14"
+                   ToolTip="トゲナシトゲアリ"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=2142858141"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=2142858141&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="空の箱 (井芹仁菜、河原木桃香)"
+                       ToolTip="空の箱 (井芹仁菜、河原木桃香)"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/X__lTAkl2yV6iNv5k0ewtw==/109951172819357853.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="42"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="VORTEX"
+                       ToolTip="VORTEX"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="白鲨JAWS"
+                   Height="14"
+                   ToolTip="白鲨JAWS"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=2061975011"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=2061975011&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="《时光代理人第二季》动画原声带"
+                       ToolTip="《时光代理人第二季》动画原声带"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/xzm2HOT5DpobOk73OhE9QQ==/109951170627348480.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="43"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="鳥の詩"
+                       ToolTip="鳥の詩"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="Lia"
+                   Height="14"
+                   ToolTip="Lia"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=28151022"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=28151022&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="AIR ORIGINAL SOUNDTRACK"
+                       ToolTip="AIR ORIGINAL SOUNDTRACK"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p4.music.126.net/UoHin_i29CVJr4gKPEY1kQ==/109951171836647530.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="44"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="三葉のテーマ"
+                       ToolTip="三葉のテーマ"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="RADWIMPS"
+                   Height="14"
+                   ToolTip="RADWIMPS"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=426881500"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=426881500&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="君の名は。"
+                       ToolTip="君の名は。"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/rfstzrVK05hCPjU-4mzSFA==/109951167983448236.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="45"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="ギターと孤独と蒼い惑星"
+                       ToolTip="ギターと孤独と蒼い惑星"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="結束バンド"
+                   Height="14"
+                   ToolTip="結束バンド"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=1991012773"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=1991012773&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="ギターと孤独と蒼い惑星"
+                       ToolTip="ギターと孤独と蒼い惑星"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/pVJnTwkrPfH9jZ5qTEhZOQ==/109951170709031886.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="46"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="顔"
+                       ToolTip="顔"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="Ave Mujica"
+                   Height="14"
+                   ToolTip="Ave Mujica"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=2693116966"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=2693116966&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="顔"
+                       ToolTip="顔"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/O19Ctckrk5MFNPqvwuEZeQ==/109951172561628145.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="47"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="Cold Night"
+                       ToolTip="Cold Night"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="HANA"
+                   Height="14"
+                   ToolTip="HANA"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=3337657311"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=3337657311&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="Cold Night"
+                       ToolTip="Cold Night"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/gG1N7fCmFIx8n_qJ2E4IWg==/109951173415738191.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="48"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="余計なこと"
+                       ToolTip="余計なこと"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="ネクライトーキー"
+                   Height="14"
+                   ToolTip="ネクライトーキー"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=3395229069"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=3395229069&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="煙とブルー e.p."
+                       ToolTip="煙とブルー e.p."/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p4.music.126.net/zlqGdUETCDI0T-sRZ6kbGA==/109951170245490325.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="49"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="私の楽しい日常"
+                       ToolTip="私の楽しい日常"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="鈴木暁也"
+                   Height="14"
+                   ToolTip="鈴木暁也"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=2144658093"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=2144658093&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="TVアニメ『魔法少女にあこがれて』オリジナルサウンドトラック"
+                       ToolTip="TVアニメ『魔法少女にあこがれて』オリジナルサウンドトラック"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p4.music.126.net/qMg2-kgxvYwMRvABdQJ91Q==/109951166198069948.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="50"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="secret base ~君がくれたもの~ (10 years after Ver.)"
+                       ToolTip="secret base ~君がくれたもの~ (10 years after Ver.)"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="茅野愛衣/戸松遥/早見沙織"
+                   Height="14"
+                   ToolTip="茅野愛衣/戸松遥/早見沙織"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=33911781"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=33911781&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="secret base ～君がくれたもの～"
+                       ToolTip="secret base ～君がくれたもの～"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/oH5PdA9HylzeXyQVqzljHQ==/109951172369955615.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="51"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="Lull(《时光代理人 英都篇》动画片尾曲)"
+                       ToolTip="Lull(《时光代理人 英都篇》动画片尾曲)"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="AK刘彰"
+                   Height="14"
+                   ToolTip="AK刘彰"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=2657178567"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=2657178567&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="《时光代理人 英都篇》动画原声带"
+                       ToolTip="《时光代理人 英都篇》动画原声带"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p4.music.126.net/otpQWO3_SYzNe7F7wLwbdA==/109951172602512218.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="52"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="ワールドイズマイン (Anime ver.) [CPK! Remix]"
+                       ToolTip="ワールドイズマイン (Anime ver.) [CPK! Remix]"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="ryo (supercell)/夏吉ゆうこ/早見沙織"
+                   Height="14"
+                   ToolTip="ryo (supercell)/夏吉ゆうこ/早見沙織"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=3340107499"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=3340107499&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="Ex-Otogibanashi"
+                       ToolTip="Ex-Otogibanashi"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/GEVvdbVLv9qFogkI_j8Jvw==/109951170251764557.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="53"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="With a Wish"
+                       ToolTip="With a Wish"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="鬼頭明里"
+                   Height="14"
+                   ToolTip="鬼頭明里"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=2656120905"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=2656120905&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="With a Wish"
+                       ToolTip="With a Wish"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p4.music.126.net/jNzdcRs1e_PTgkZtHaaF-w==/109951173798914937.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="54"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="Return of the King"
+                       ToolTip="Return of the King"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="Division All Stars"
+                   Height="14"
+                   ToolTip="Division All Stars"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=3424263403"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=3424263403&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="Trick or Repeat"
+                       ToolTip="Trick or Repeat"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p4.music.126.net/Y4iTwIZT5rfGSjRl3J_M5A==/109951173671111218.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="55"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="夢はトゥルーエンド！"
+                       ToolTip="夢はトゥルーエンド！"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="夢限大みゅーたいぷ"
+                   Height="14"
+                   ToolTip="夢限大みゅーたいぷ"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=3414434419"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=3414434419&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="夢はトゥルーエンド！"
+                       ToolTip="夢はトゥルーエンド！"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p4.music.126.net/rwWOrSz65eAdnQsHy9Vghw==/109951172602675059.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="56"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="瞬間、シンフォニー。"
+                       ToolTip="瞬間、シンフォニー。"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="40mP/かぐや(cv.夏吉ゆうこ)/超かぐや姫！"
+                   Height="14"
+                   ToolTip="40mP/かぐや(cv.夏吉ゆうこ)/超かぐや姫！"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=3340113701"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=3340113701&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="超かぐや姫！"
+                       ToolTip="超かぐや姫！"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/feH0T_yKxa5WgNCOwKkigw==/109951167131909625.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="57"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="カゲの悲しい過去"
+                       ToolTip="カゲの悲しい過去"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="ゆうまお"
+                   Height="14"
+                   ToolTip="ゆうまお"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=1926861364"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=1926861364&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="王様ランキング オリジナルサウンドトラック"
+                       ToolTip="王様ランキング オリジナルサウンドトラック"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/oH5PdA9HylzeXyQVqzljHQ==/109951172369955615.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="58"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="Wake Up(《时光代理人 英都篇》动画插曲)"
+                       ToolTip="Wake Up(《时光代理人 英都篇》动画插曲)"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="墨绛"
+                   Height="14"
+                   ToolTip="墨绛"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=2667803392"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=2667803392&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="《时光代理人 英都篇》动画原声带"
+                       ToolTip="《时光代理人 英都篇》动画原声带"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                <Border Height="25"
+        Margin="1"
+        Background="#e02e66"
+        CornerRadius="7"
+        HorizontalAlignment="Left"
+        ToolTip="此歌曲需要VIP/SVIP">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="10,3,10,3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="18"
+                   Margin="0,0,2,-1"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="VIP"/>
+    </StackPanel>
+</Border>
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p4.music.126.net/rwWOrSz65eAdnQsHy9Vghw==/109951172602675059.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="59"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="ray (超かぐや姫！ Version)"
+                       ToolTip="ray (超かぐや姫！ Version)"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="かぐや(cv.夏吉ゆうこ)/月見ヤチヨ(cv.早見沙織)/超かぐや姫！"
+                   Height="14"
+                   ToolTip="かぐや(cv.夏吉ゆうこ)/月見ヤチヨ(cv.早見沙織)/超かぐや姫！"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=3340114786"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=3340114786&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="超かぐや姫！"
+                       ToolTip="超かぐや姫！"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                
+    </StackPanel>
+</local:MyCard>
+<local:MyCard Margin="4"
+              Width="163">
+    <StackPanel Margin="10">
+        <Grid Height="143"
+              Width="143">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <local:MyImage
+                    Source="https://p3.music.126.net/ET_UPtNgVuJaXJGUVPN0MA==/109951173535666193.jpg"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Border VerticalAlignment="Center"
+        Height="20"
+        Width="45"
+        Margin="0,5,5,-1"
+        Background="#7b859a"
+        CornerRadius="7">
+    <StackPanel HorizontalAlignment="Center"
+                Margin="3"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+        <TextBlock FontSize="10"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="No."/>
+        <TextBlock FontSize="15"
+            Margin="0,0,0,-2"
+                   Foreground="{DynamicResource ColorBrush8}"
+                   VerticalAlignment="Bottom"
+                   Text="60"/>
+    </StackPanel>
+</Border>
+            <TextBlock Margin="0,5,0,0"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Text="Out For Love"
+                       ToolTip="Out For Love"/>
+        </StackPanel>
+        <TextBlock Margin="0,2,0,0"
+                   FontSize="12"
+                   Text="Daphne Rubin-Vega/Andrew Underberg/Sam Haft/Hazbin Hotel"
+                   Height="14"
+                   ToolTip="Daphne Rubin-Vega/Andrew Underberg/Sam Haft/Hazbin Hotel"/>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,2,0,0">
+            <local:MyButton
+                Margin="1,0,1,0"
+                Height="18"
+                Width="37"
+                Text="查看"
+                EventType="打开网页"
+                EventData="https://music.163.com/#/song?id=2122126996"/>
+            <local:MyButton
+                Visibility="Visible"
+                Margin="1,0,1,0"
+                Height="18"
+                Width="50"
+                ToolTip="呼出本地网易云音乐打开！"
+                Text="客户端"
+                EventType="打开网页"
+                EventData="https://p.kaphia.qzz.io/PCLCloudMusicPageRedirect?id=2122126996&amp;type=song"/>
+            <TextBlock Margin="1,0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="Hazbin Hotel (Original Soundtrack)"
+                       ToolTip="Hazbin Hotel (Original Soundtrack)"/>
+        </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="-7,-7,-7,0">
+                
+    </StackPanel>
+</local:MyCard>
+    </WrapPanel>
+</StackPanel>
