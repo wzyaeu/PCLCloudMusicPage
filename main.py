@@ -733,6 +733,13 @@ def musicvotepage(accepted_submissions):
         ,ensure_ascii=False))
         save_output_file(f'vote_rank_{index}.xaml',o)
 
+def sfile():
+    for root, _, files in os.walk(os.path.join(BASE_PATH, 'data')):
+        for file in files:
+            src_path = os.path.join(root, file)
+            dst_path = os.path.join(os.path.join(BASE_PATH, 'output'), file)
+            shutil.copy2(src_path, dst_path)
+
 def init():
     print('init-初始化中')
     global OUTPUT_PATH, BASE_PATH, BUILD_VERSION, templates, ncm, test_environment, sponsors
@@ -783,5 +790,8 @@ def init():
 
     print('init-运行newalbum')
     newalbum()
+
+    print('init-运行sfile')
+    sfile()
 
 init()
