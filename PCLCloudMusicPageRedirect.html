@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>PCLCloudMusicPage 客户端跳转</title>
+</head>
+<body>
+  <p>正在跳转...</p>
+
+  <script>
+    function makeOrpheusUrl(songId, idType) {
+      const payload = {
+        type: idType,
+        id: songId,
+        cmd: "play"
+      };
+
+      const jsonStr = JSON.stringify(payload);
+      const base64 = btoa(unescape(encodeURIComponent(jsonStr)));
+
+      return "orpheus://" + base64;
+    }
+
+    (function () {
+      // 解析 URL 中的 id 参数
+      const params = new URLSearchParams(window.location.search);
+      const songId = params.get("id");
+      const idType = params.get("type");
+
+      if (!songId) {
+        document.body.innerHTML = "<p>缺少 id 参数</p>";
+        return;
+      }
+
+      if (!idType) {
+        document.body.innerHTML = "<p>缺少 type 参数</p>";
+        return;
+      }
+
+      const url = makeOrpheusUrl(songId, idType);
+      console.log(url)
+
+      // 将生成的 orpheus:// 链接赋值并跳转
+      location.href = url;
+    })();
+  </script>
+</body>
+</html>
